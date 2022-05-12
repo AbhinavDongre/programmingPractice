@@ -1,0 +1,67 @@
+Leader of an array- An element is said to be a leader if all the elements on right to it are smaller than selected element or the maximum of right part is less than the selected element.  
+
+Brute force approach to find leader O(n^2). 
+Scroll down for O(n) optimized approach.
+
+
+        
+        //Brute force approach to find Leader in array
+        
+         ArrayList <Integer> list= new ArrayList<Integer>(); // Will contain all leader elements of the array.
+        for(int i=0;i<A.length;i++)
+        {
+            int max= A[i] ; //picking an element from the array and comparing the max , if max updated it means arr[i] isn't leader.
+
+            for(int j=i+1; j<A.length;j++)
+            {
+                if(A[j]>max)
+                {
+                    max=A[j];
+                    break;       // since arr[i] wasn't leader so no further need to check it 
+                }
+            } 
+            if(max==A[i])
+            {
+                list.add(A[i]);
+            }
+        }
+
+        int leaderSize= list.size();
+        int leadArr[]= new int [leaderSize];
+        for(int j=0;j<leaderSize;j++){
+            leadArr[j]=list.get(j);
+        }
+
+        return leadArr;
+    }
+
+
+    
+    
+    
+    
+    
+    Leader in O(n) time
+    
+    public int[] solve(int A[])
+{    
+    ArrayList <Integer> list= new ArrayList<Integer>(); // here we'll add leader elements
+    int max=A[A.length-1];
+    list.add(max);// rightmost element of an array is always leader
+    for(int i=A.length-2;i>=0; i--) //O(n) approach to find leader
+    {
+        if(A[i]>max)
+        {
+            max= A[i];
+            list.add(A[i]);
+        }
+    }
+
+    int leaderSize= list.size();
+        int leadArr[]= new int [leaderSize];
+        for(int j=0;j<leaderSize;j++){
+            leadArr[j]=list.get(j);
+        }
+
+        return leadArr;
+    }
